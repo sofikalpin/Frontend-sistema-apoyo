@@ -1,7 +1,7 @@
 import * as signalR from "@microsoft/signalr";
 
 const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://backend-sistema-apoyo-production.up.railway.app//chatHub")
+    .withUrl("http://localhost:5228/chatHub")
     .configureLogging(signalR.LogLevel.Information)
     .withAutomaticReconnect()
     .build();
