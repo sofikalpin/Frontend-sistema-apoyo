@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AiOutlineMessage } from "react-icons/ai";
-import { useUser } from "../../Context/UserContext";
+import UserContext from "../Context/UserContext";
 import logo from "../../logo/LogoInicio.png";
 
 const navigationLinks = {
