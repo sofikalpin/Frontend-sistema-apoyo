@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import Header from "./HeaderProfesor"; 
+//import Header from "./HeaderProfesor";
+import HeaderCompleto from "../HeaderCompleto";  
 import Footer from "./FooterProfesor"; 
 
 const cursos = [
