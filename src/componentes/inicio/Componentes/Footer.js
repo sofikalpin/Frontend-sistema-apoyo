@@ -27,6 +27,12 @@ const footerSections = {
       { name: "Nivel Avanzado", path: "/NivelAvanzado" },
     ],
   },
+  section3: {
+    title: "Danos tu opinión sobre nosotros!",
+    links: [
+      { name: "Junto a ArgyReviews", path: "/resena" },
+    ],
+  },
 };
 
 const UpdatedFooter = ({ socialIcons = [], footerSections = {}, navigate }) => {
@@ -40,11 +46,10 @@ const UpdatedFooter = ({ socialIcons = [], footerSections = {}, navigate }) => {
 
   return (
     <footer className="bg-blue-900 text-white">
-      <div className="max-w-6xl mx-auto py-12 px-4 text-center pl-30 ">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 justify-center pl-20">
+      <div className="max-w-6xl mx-auto py-12 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {Object.values(footerSections).map((section, index) => (
-            <div key={index} className="text-center">
+            <div key={index} className="text-center md:text-left">
               <h3 className="font-semibold text-lg mb-4">{section.title}</h3>
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
@@ -60,10 +65,9 @@ const UpdatedFooter = ({ socialIcons = [], footerSections = {}, navigate }) => {
               </ul>
             </div>
           ))}
-
-          <div className="text-center">
+          <div className="text-center md:text-left">
             <h3 className="font-semibold text-lg mb-4">Redes Sociales</h3>
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center md:justify-start space-x-4">
               {socialIcons.map((icon, index) => {
                 const IconComponent = icon.icon;
                 return (
@@ -80,8 +84,7 @@ const UpdatedFooter = ({ socialIcons = [], footerSections = {}, navigate }) => {
             </div>
           </div>
         </div>
-
-        <div className="pt-8 mt-8 border-t border-gray-800">
+        <div className="pt-8 mt-8 border-t border-gray-800 text-center md:text-left">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} EduMatch. Todos los derechos reservados.
           </p>
@@ -93,7 +96,6 @@ const UpdatedFooter = ({ socialIcons = [], footerSections = {}, navigate }) => {
 
 export default function App() {
   const navigate = useNavigate();
-
   return (
     <div className="bg-gray-100">
       <UpdatedFooter

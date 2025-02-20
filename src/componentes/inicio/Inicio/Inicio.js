@@ -17,7 +17,6 @@ const socialIcons = [
   { name: 'Linkedin', color: 'hover:text-blue-700' }
 ];
 
-
 const Modal = ({ title, children, onClose }) => (
   <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center z-20">
     <div className="bg-white p-8 rounded-xl w-96">
@@ -113,7 +112,6 @@ export default function Inicio() {
         } else {
           throw new Error('Se esperaba un arreglo de reseñas, pero se recibió otro formato');
         }
-        
       
         const usersResponse = await fetch('https://backend-sistema-apoyo-production.up.railway.app/API/Usuario/ListaUsuarios');
         if (!usersResponse.ok) {
@@ -168,16 +166,10 @@ export default function Inicio() {
 
   return (
     <div className="bg-gray-100">
-    
-      <TopBar 
-        onLogin={() => navigate('/iniciarsesion')} 
-        onRegister={() => navigate('/registrarse')} 
-      />
       <Header 
         onNavigate={navigate}
         logo={logo}
       />
-
   
       <section
         className="bg-cover bg-center p-16 text-center min-h-[80vh] relative"
@@ -204,7 +196,6 @@ export default function Inicio() {
         </div>
       </section>
 
-      
       <section className="p-12 bg-gray-50">
         <h2 className="text-3xl font-semibold text-blue-900 mb-8 text-center">
           Tres pilares de aprendizaje que garantizan tu fluidez

@@ -243,7 +243,6 @@ export default function InicioProfesor() {
 
   return (
     <div className="bg-gray-100 flex flex-col min-h-screen">
-      <TopBar onLogin={() => navigate('/iniciarsesion')} onRegister={() => navigate('/registrarse')} />
       <Header onNavigate={navigate} logo={logo} />
       
       <div className="flex-grow">

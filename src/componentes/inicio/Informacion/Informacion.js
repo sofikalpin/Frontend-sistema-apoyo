@@ -206,10 +206,6 @@ const InfoPages = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-       <TopBar 
-        onLogin={() => navigate('/iniciarsesion')} 
-        onRegister={() => navigate('/registrarse')} 
-      />
       <Header 
         onNavigate={navigate}
         logo={logo}

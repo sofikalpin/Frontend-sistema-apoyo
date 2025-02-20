@@ -118,10 +118,6 @@ const A1A2CourseContentPage = () => {
 
   return (
     <div>
-      <TopBar 
-        onLogin={() => navigate('/iniciarsesion')} 
-        onRegister={() => navigate('/registrarse')} 
-      />
       <Header 
         onNavigate={navigate}
         logo={logo}

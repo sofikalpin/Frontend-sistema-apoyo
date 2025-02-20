@@ -118,10 +118,6 @@ const C1CourseContent = () => {
   
     return (
       <div>
-        <TopBar 
-          onLogin={() => navigate('/iniciarsesion')} 
-          onRegister={() => navigate('/registrarse')} 
-        />
         <Header 
           onNavigate={navigate}
           logo={logo}
