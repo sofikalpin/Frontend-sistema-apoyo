@@ -3,8 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from 'lucide-react';
 import actividad from "../Imagenes/actividades.png";
-//import Header from "../HeaderAlumno";
-import Header from '../components/HeaderCompleto'
+import Header from "../HeaderAlumno";
 import Footer from "../FooterAlumno";
 import axios from "axios";
 
