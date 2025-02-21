@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useUser } from "../../../Context/UserContext";
 import logo from "../../../logo/LogoInicio.png";
 import ProgramDropdown from "./ProgramDropdown";
@@ -25,14 +25,13 @@ const navigationLinks = {
 const Header = () => {
   const { user, logout } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const isForumRelatedPage = (pathname) => {
-    console.log("Current pathname:", pathname);
-
     const forumPaths = [
       "/crear-consulta",
       "/crear-respuesta",
@@ -51,10 +50,7 @@ const Header = () => {
       pathname.startsWith("/nuevaConsulta") ||
       pathname.startsWith("/nuevaRespuesta");
 
-    const shouldHide = isExactMatch || containsForumPath || isCrearConsultaWithId;
-    console.log("Should hide forum button:", shouldHide);
-
-    return shouldHide;
+    return isExactMatch || containsForumPath || isCrearConsultaWithId;
   };
 
   const hideForo = isForumRelatedPage(location.pathname);
@@ -79,6 +75,7 @@ const Header = () => {
   const userInitial = userName.charAt(0).toUpperCase();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const goToProfile = () => navigate("/perfil");
   const handleLogoutClick = () => setIsLogoutModalOpen(true);
   const handleLogout = () => {
@@ -117,31 +114,33 @@ const Header = () => {
               className="h-11 cursor-pointer mr-4"
               onClick={() => navigate("/")}
             />
-            <button
-              onClick={() => navigate("/inicioprofesor")}
-              className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
-            >
-              Profesores
-            </button>
-            <div className="relative">
+            <div className="hidden md:flex items-center gap-6">
               <button
-                onMouseEnter={() => setIsProgramsOpen(true)}
-                className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors flex items-center gap-2"
+                onClick={() => navigate("/inicioprofesor")}
+                className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
               >
-                Programas
-                <ChevronDown className={`w-5 h-5 transition-transform ${isProgramsOpen ? "rotate-180" : ""}`} />
+                Profesores
               </button>
-              <ProgramDropdown isOpen={isProgramsOpen} onClose={() => setIsProgramsOpen(false)} />
+              <div className="relative">
+                <button
+                  onMouseEnter={() => setIsProgramsOpen(true)}
+                  className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors flex items-center gap-2"
+                >
+                  Programas
+                  <ChevronDown className={`w-5 h-5 transition-transform ${isProgramsOpen ? "rotate-180" : ""}`} />
+                </button>
+                <ProgramDropdown isOpen={isProgramsOpen} onClose={() => setIsProgramsOpen(false)} />
+              </div>
+              <button
+                onClick={() => navigate("/informacion")}
+                className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
+              >
+                Conocenos
+              </button>
             </div>
-            <button
-              onClick={() => navigate("/informacion")}
-              className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
-            >
-              Conocenos
-            </button>
           </nav>
 
-          <nav className="flex gap-6">
+          <nav className="hidden md:flex gap-6">
             <button
               onClick={() => navigate("/iniciarsesion")}
               className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
@@ -155,7 +154,68 @@ const Header = () => {
               Registrarse
             </button>
           </nav>
+
+          <button className="md:hidden" onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? (
+              <X className="text-white w-6 h-6" />
+            ) : (
+              <Menu className="text-white w-6 h-6" />
+            )}
+          </button>
         </header>
+
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-teal-600 p-4">
+            <div className="flex flex-col gap-4">
+              <button
+                onClick={() => {
+                  navigate("/inicioprofesor");
+                  toggleMobileMenu();
+                }}
+                className="text-white font-bold hover:text-yellow-400 text-xl"
+              >
+                Profesores
+              </button>
+              <button
+                onClick={() => {
+                  setIsProgramsOpen(!isProgramsOpen);
+                }}
+                className="text-white font-bold hover:text-yellow-400 text-xl flex items-center justify-between"
+              >
+                Programas
+                <ChevronDown className={`w-5 h-5 transition-transform ${isProgramsOpen ? "rotate-180" : ""}`} />
+              </button>
+              {isProgramsOpen && <ProgramDropdown isOpen={true} onClose={() => setIsProgramsOpen(false)} />}
+              <button
+                onClick={() => {
+                  navigate("/informacion");
+                  toggleMobileMenu();
+                }}
+                className="text-white font-bold hover:text-yellow-400 text-xl"
+              >
+                Conocenos
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/iniciarsesion");
+                  toggleMobileMenu();
+                }}
+                className="text-white font-bold hover:text-yellow-400 text-xl"
+              >
+                Iniciar Sesión
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/registrarse");
+                  toggleMobileMenu();
+                }}
+                className="text-white font-bold hover:text-yellow-400 text-xl"
+              >
+                Registrarse
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -173,7 +233,7 @@ const Header = () => {
                 onClick={goToHome}
               />
 
-              <nav className="flex items-center space-x-4">
+              <nav className="hidden md:flex items-center space-x-4">
                 {userRole === "profesor-noAutorizado" ? (
                   <Link to="/profesor-noAutorizado" className="text-white font-bold hover:text-yellow-400 text-xl">
                     Inicio
@@ -195,9 +255,127 @@ const Header = () => {
                 )}
               </nav>
             </div>
+
+            <div className="flex items-center gap-4">
+              <button
+                onClick={goToChat}
+                className="hidden md:block text-white font-bold hover:text-yellow-400 text-xl"
+              >
+                Chat
+              </button>
+              
+              <div className="relative">
+                <button
+                  onClick={toggleMenu}
+                  className="flex items-center gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
+                    <span className="text-teal-600 font-bold">{userInitial}</span>
+                  </div>
+                  <span className="hidden md:inline text-white font-bold">{userName}</span>
+                </button>
+
+                {isMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+                    <div className="py-1">
+                      <button
+                        onClick={goToProfile}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Mi Perfil
+                      </button>
+                      <button
+                        onClick={handleLogoutClick}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Cerrar Sesión
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <button className="md:hidden" onClick={toggleMobileMenu}>
+                {isMobileMenuOpen ? (
+                  <X className="text-white w-6 h-6" />
+                ) : (
+                  <Menu className="text-white w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-teal-600 p-4">
+          <div className="flex flex-col gap-4">
+            {userRole === "profesor-noAutorizado" ? (
+              <Link 
+                to="/profesor-noAutorizado" 
+                className="text-white font-bold hover:text-yellow-400 text-xl"
+                onClick={toggleMobileMenu}
+              >
+                Inicio
+              </Link>
+            ) : (
+              <>
+                {navigationLinks[userRole]?.map((link) => (
+                  <Link 
+                    key={link.path} 
+                    to={link.path} 
+                    className="text-white font-bold hover:text-yellow-400 text-xl"
+                    onClick={toggleMobileMenu}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+
+                {!hideForo && ((userRole && user.idrol !== 1) || (user.idrol === 1 && user.autProf)) && (
+                  <Link 
+                    to="/listaForos" 
+                    className="text-white font-bold hover:text-yellow-400 text-xl"
+                    onClick={toggleMobileMenu}
+                  >
+                    Foro
+                  </Link>
+                )}
+              </>
+            )}
+            <button
+              onClick={() => {
+                goToChat();
+                toggleMobileMenu();
+              }}
+              className="text-white font-bold hover:text-yellow-400 text-xl text-left"
+            >
+              Chat
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg">
+            <h2 className="text-xl font-bold mb-4">¿Está seguro que desea cerrar sesión?</h2>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={closeLogoutModal}
+                className="px-4 py-2 text-gray-600 hover:text-gray-800"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              >
+                Cerrar Sesión
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
