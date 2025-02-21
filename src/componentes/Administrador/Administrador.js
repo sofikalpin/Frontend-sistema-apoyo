@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import logo from '../../logo/LogoInicio.png';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from './HeaderAdministrador';
-import Footer from '../Administrador/FooteraAdministrador';
+import Header from '../inicio/Componentes/Header';
+import Footer from '../inicio/Componentes/Footer';
 
 const socialIcons = [
     { name: 'Facebook', color: 'hover:text-blue-500' },

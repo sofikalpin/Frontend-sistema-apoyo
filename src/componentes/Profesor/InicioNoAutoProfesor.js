@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./HeaderNoAutoProfesor"; 
-import Footer from "./FooterProfesor"; 
+import Header from "../inicio/Componentes/Header";
+import Footer from "../inicio/Componentes/Footer";
 
 const InicioProfesor = () => {
   return (

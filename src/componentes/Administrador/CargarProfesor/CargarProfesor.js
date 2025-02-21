@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TablaProfesores from "./TablaProfesAutorizar/TablaProfesA.js";
 import axios from "axios";
-import Header from "../HeaderAdministrador.js";
-import Footer from "../FooteraAdministrador.js";
+import Header from "../../inicio/Componentes/Header.js";
+import Footer from "../../inicio/Componentes/Footer.js";
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from "react-router-dom"; 
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HeaderForo from "../HeaderForo";
-import { Plus, ChevronRight, User } from "lucide-react";
-import FooterForo from "../FooterForo";
+import HeaderForo from "../../inicio/Componentes/Header";
+import { Plus, User } from "lucide-react";
+import FooterForo from "../../inicio/Componentes/Footer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../../../Context/UserContext";
 import { ArrowLeft } from 'lucide-react';

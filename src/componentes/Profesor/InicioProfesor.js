@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import Header from "./HeaderProfesor"; 
-import Footer from "./FooterProfesor"; 
+import Header from "../inicio/Componentes/Header";
+import Footer from "../inicio/Componentes/Footer"; 
 
 const cursos = [
   { id: 1, nombre: "A1: Curso Principiante" },

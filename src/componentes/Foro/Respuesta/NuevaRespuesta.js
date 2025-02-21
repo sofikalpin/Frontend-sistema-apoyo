@@ -3,7 +3,7 @@ import { ArrowLeft, Send } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from "../../../Context/UserContext";
-import HeaderForo from '../HeaderForo.js';
+import HeaderForo from '../../inicio/Componentes/Header';
 
 const Card = ({ children, className }) => (
   <div className={`bg-white rounded-xl shadow-lg overflow-hidden ${className}`}>

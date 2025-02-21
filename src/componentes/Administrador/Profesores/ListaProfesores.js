@@ -3,8 +3,8 @@ import TablaProfesoresT from "./TablaProfesores/TablaProfes.js";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from 'lucide-react';
 import axios from "axios";
-import Header from "../HeaderAdministrador.js";
-import Footer from "../FooteraAdministrador.js";
+import Header from "../../inicio/Componentes/Header.js";
+import Footer from "../../inicio/Componentes/Footer.js";
 
 const ListaProfesores = () => {
     const [profesores, setProfesores] = useState([]);

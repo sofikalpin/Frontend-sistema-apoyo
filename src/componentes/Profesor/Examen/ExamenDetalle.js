@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import fileIcon from "../Imagenes/examen.avif";
 import deleteIcon from "../Imagenes/delete.png";
-import Header from "../HeaderProfesor";
-import Footer from "../FooterProfesor";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import axios from "axios";
 import { useUser } from "../../../Context/UserContext";
 

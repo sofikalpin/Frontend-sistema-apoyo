@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../HeaderProfesor";
-import Footer from "../FooterProfesor"; 
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer"; 
 
 const MisAlumnos = () => {
   const [cursos, setCursos] = useState({});

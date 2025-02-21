@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../../../Context/UserContext"; 
-import Header from "../HeaderAlumno";
-import Footer from "../FooterAlumno";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import { Search, UserRound, MessageCircle, Send, X, Star } from "lucide-react";
 
 const MisProfesores = () => {

@@ -6,8 +6,8 @@ import logoB1 from "../../../logo/Cursos/B1.png";
 import logoB2 from "../../../logo/Cursos/B2.png";
 import logoC1 from "../../../logo/Cursos/C1.png";
 import logoC2 from "../../../logo/Cursos/C2.png";
-import Header from "../HeaderAlumno";
-import Footer from "../FooterAlumno";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import { useUser } from "../../../Context/UserContext";
 
 const MisCursos = () => {

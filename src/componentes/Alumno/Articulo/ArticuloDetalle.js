@@ -4,8 +4,8 @@ import ReactMarkdown from "react-markdown";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import articuloImagen from "../Imagenes/articulo.png"
-import Header from '../HeaderAlumno';
-import Footer from '../FooterAlumno';
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import axios from 'axios';
 
 const ArticuloDetalle = () => {

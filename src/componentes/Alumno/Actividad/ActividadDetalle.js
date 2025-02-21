@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import logoactividad from "../Imagenes/actividades.png";
 import { ArrowLeft } from "lucide-react";
-import Header from "../HeaderAlumno";
-import Footer from "../FooterAlumno";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 

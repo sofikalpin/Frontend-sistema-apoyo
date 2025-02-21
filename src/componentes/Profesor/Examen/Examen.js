@@ -3,8 +3,8 @@ import { FaSearch } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from 'lucide-react';
 import examenImg from "../Imagenes/examen.avif";  
-import Header from "../HeaderProfesor";
-import Footer from "../FooterProfesor";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import axios from "axios";
 import { useUser } from "../../../Context/UserContext";
 

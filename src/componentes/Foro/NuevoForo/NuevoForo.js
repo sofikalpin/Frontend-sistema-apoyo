@@ -3,7 +3,7 @@ import { ArrowLeft, Send } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; 
 import axios from "axios";
 import { useUser } from "../../../Context/UserContext.js";
-import HeaderForo from '../HeaderForo.js';
+import HeaderForo from '../../inicio/Componentes/Header.js';
 
 const NuevoForo = () => {
     const { user } = useUser();

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useUser } from "../../../Context/UserContext";
 import logo from "../../../logo/LogoInicio.png";
 import ProgramDropdown from "./ProgramDropdown";
@@ -31,8 +31,6 @@ const Header = () => {
   const location = useLocation();
 
   const isForumRelatedPage = (pathname) => {
-    console.log("Current pathname:", pathname);
-
     const forumPaths = [
       "/crear-consulta",
       "/crear-respuesta",
@@ -51,10 +49,7 @@ const Header = () => {
       pathname.startsWith("/nuevaConsulta") ||
       pathname.startsWith("/nuevaRespuesta");
 
-    const shouldHide = isExactMatch || containsForumPath || isCrearConsultaWithId;
-    console.log("Should hide forum button:", shouldHide);
-
-    return shouldHide;
+    return isExactMatch || containsForumPath || isCrearConsultaWithId;
   };
 
   const hideForo = isForumRelatedPage(location.pathname);
@@ -85,7 +80,6 @@ const Header = () => {
     logout();
     setIsLogoutModalOpen(false);
   };
-  
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
   const goToChat = () => navigate("/chat");
   const goToHome = () => {
@@ -109,7 +103,7 @@ const Header = () => {
   if (!user) {
     return (
       <div className="flex flex-col w-full">
-        <header className="flex items-center justify-between p-6" style={{ backgroundColor: "#00A89F" }}>
+        <header className="flex items-center justify-between p-6 bg-[#00A89F]">
           <nav className="flex items-center gap-4">
             <img
               src={logo || "/placeholder.svg"}
@@ -141,7 +135,7 @@ const Header = () => {
             </button>
           </nav>
 
-          <nav className="flex gap-6">
+          <nav className="hidden md:flex gap-6">
             <button
               onClick={() => navigate("/iniciarsesion")}
               className="text-white font-bold hover:text-yellow-400 active:text-yellow-400 text-xl transition-colors"
@@ -155,49 +149,103 @@ const Header = () => {
               Registrarse
             </button>
           </nav>
+
+          {/* Botón de menú para móviles */}
+          <button onClick={toggleMenu} className="md:hidden text-white">
+            <Menu className="w-8 h-8" />
+          </button>
         </header>
+
+        {/* Menú móvil */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-[#00A89F] p-4">
+            <button
+              onClick={() => navigate("/iniciarsesion")}
+              className="block text-white font-bold hover:text-yellow-400 text-xl mb-2"
+            >
+              Iniciar Sesión
+            </button>
+            <button
+              onClick={() => navigate("/registrarse")}
+              className="block text-white font-bold hover:text-yellow-400 text-xl"
+            >
+              Registrarse
+            </button>
+          </div>
+        )}
       </div>
     );
   }
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex items-center justify-between p-6" style={{ backgroundColor: "#00A89F" }}>
-        <div className="w-full">
-          <div className="flex items-center justify-between h-14">
-            <div className="flex items-center gap-2">
-              <img
-                src={logo || "/placeholder.svg"}
-                alt="EDU-MATCH"
-                className="h-11 cursor-pointer mr-4"
-                onClick={goToHome}
-              />
+      <header className="flex items-center justify-between p-6 bg-[#00A89F]">
+        <div className="flex items-center gap-2">
+          <img
+            src={logo || "/placeholder.svg"}
+            alt="EDU-MATCH"
+            className="h-11 cursor-pointer mr-4"
+            onClick={goToHome}
+          />
 
-              <nav className="flex items-center space-x-4">
-                {userRole === "profesor-noAutorizado" ? (
-                  <Link to="/profesor-noAutorizado" className="text-white font-bold hover:text-yellow-400 text-xl">
-                    Inicio
-                  </Link>
-                ) : (
-                  <>
-                    {navigationLinks[userRole]?.map((link) => (
-                      <Link key={link.path} to={link.path} className="text-white font-bold hover:text-yellow-400 text-xl">
-                        {link.label}
-                      </Link>
-                    ))}
-
-                    {!hideForo && ((userRole && user.idrol !== 1) || (user.idrol === 1 && user.autProf)) && (
-                      <Link to="/listaForos" className="text-white font-bold hover:text-yellow-400 text-xl">
-                        Foro
-                      </Link>
-                    )}
-                  </>
-                )}
-              </nav>
-            </div>
-          </div>
+          {/* Botón de menú para móviles */}
+          <button onClick={toggleMenu} className="md:hidden text-white">
+            {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          </button>
         </div>
-      </div>
+
+        {/* Menú de navegación para desktop */}
+        <nav className="hidden md:flex items-center space-x-4">
+          {userRole === "profesor-noAutorizado" ? (
+            <Link to="/profesor-noAutorizado" className="text-white font-bold hover:text-yellow-400 text-xl">
+              Inicio
+            </Link>
+          ) : (
+            <>
+              {navigationLinks[userRole]?.map((link) => (
+                <Link key={link.path} to={link.path} className="text-white font-bold hover:text-yellow-400 text-xl">
+                  {link.label}
+                </Link>
+              ))}
+
+              {!hideForo && ((userRole && user.idrol !== 1) || (user.idrol === 1 && user.autProf)) && (
+                <Link to="/listaForos" className="text-white font-bold hover:text-yellow-400 text-xl">
+                  Foro
+                </Link>
+              )}
+            </>
+          )}
+        </nav>
+
+        {/* Menú móvil */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-[#00A89F] p-4 absolute top-16 left-0 right-0">
+            {userRole === "profesor-noAutorizado" ? (
+              <Link to="/profesor-noAutorizado" className="block text-white font-bold hover:text-yellow-400 text-xl mb-2">
+                Inicio
+              </Link>
+            ) : (
+              <>
+                {navigationLinks[userRole]?.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="block text-white font-bold hover:text-yellow-400 text-xl mb-2"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+
+                {!hideForo && ((userRole && user.idrol !== 1) || (user.idrol === 1 && user.autProf)) && (
+                  <Link to="/listaForos" className="block text-white font-bold hover:text-yellow-400 text-xl">
+                    Foro
+                  </Link>
+                )}
+              </>
+            )}
+          </div>
+        )}
+      </header>
     </div>
   );
 };

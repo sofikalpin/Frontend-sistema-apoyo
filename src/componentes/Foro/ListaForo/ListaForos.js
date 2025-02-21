@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Plus, ChevronRight, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import HeaderForo from "../HeaderForo";
-import FooterForo from "../FooterForo";
+import HeaderForo from "../../inicio/Componentes/Header";
+import FooterForo from "../../inicio/Componentes/Footer";
 import { useUser } from "../../../Context/UserContext";
 
 const ListarForos = () => {

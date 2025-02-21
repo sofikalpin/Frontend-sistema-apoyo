@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useUser } from '../../../Context/UserContext';
 import articuloImagen from "../Imagenes/articulo.jpg";
 import deleteIcon from "../Imagenes/delete.png";
-import Header from "../HeaderProfesor";
-import Footer from "../FooterProfesor";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 
 const ArticuloDetalle = () => {
   const { idarticulo } = useParams();

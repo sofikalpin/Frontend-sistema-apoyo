@@ -6,8 +6,8 @@ import logoB1 from "../Logos/B1.png";
 import logoB2 from "../Logos/B2.png";
 import logoC1 from "../Logos/C1.png";
 import logoC2 from "../Logos/C2.png";
-import Header from "../HeaderProfesor";
-import Footer from "../FooterProfesor";
+import Header from "../../inicio/Componentes/Header";
+import Footer from "../../inicio/Componentes/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
