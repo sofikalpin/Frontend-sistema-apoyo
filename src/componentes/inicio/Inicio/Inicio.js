@@ -272,7 +272,7 @@ export default function Inicio() {
         )}
       </section>
 
-      <Footer 
+      <Footer role = "inicio"
         socialIcons={socialIcons}
         onNavigation={navigate}
       />

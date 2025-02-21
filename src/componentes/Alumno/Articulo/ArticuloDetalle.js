@@ -96,7 +96,7 @@ const ArticuloDetalle = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer role = "alumno"/>
     </div>
   );
 };

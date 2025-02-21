@@ -171,7 +171,7 @@ const ProfesorCVExterno = () => {
         </div>
       )}
 
-      <Footer />
+      <Footer role = "administrador"/>
     </div>
   );
 };

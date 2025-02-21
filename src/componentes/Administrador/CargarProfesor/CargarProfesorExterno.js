@@ -165,7 +165,7 @@ const CargarProfesorExterno = () => {
                 )}
             </div>
 
-            <Footer />
+            <Footer role = "administrador"/>
         </div>
     );
 };

@@ -111,7 +111,7 @@ const MisCursos = () => {
       </div>
 
       <div className="mt-12">
-        <Footer />
+        <Footer role = "profesor" />
       </div>
     </div>
   );

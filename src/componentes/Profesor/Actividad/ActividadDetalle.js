@@ -142,7 +142,7 @@ const ActividadDetalle = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer role = "profesor"/>
     </div>
   );
 };

@@ -263,7 +263,7 @@ const ActividadesProfesor = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer role = "profesor"/>
     </div>
   );
 };

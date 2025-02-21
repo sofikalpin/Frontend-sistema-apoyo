@@ -126,7 +126,7 @@ const MisAlumnos = () => {
           );
         })}
       </div>
-      <Footer />
+      <Footer role = "profesor"/>
     </div>
   );
 };

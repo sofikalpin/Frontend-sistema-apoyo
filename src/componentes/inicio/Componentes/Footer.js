@@ -21,55 +21,52 @@ const Footer = ({ role }) => {
     window.open(link, '_blank');
   };
 
-  // Definición de las secciones
-  const baseSection = {
-    informacion: {
-      title: "Información",
-      links: [
-        { name: "Sobre Nosotros", path: "/informacion" },
-        { name: "Términos y Condiciones", path: "/informacion" },
-        { name: "Contacto", path: "/informacion" }
-      ]
-    },
-    programa: {
-      title: "Programa",
-      links: [
-        { name: "Nivel Inicial", path: "/NivelInicial" },
-        { name: "Nivel Intermedio", path: "/NivelIntermedio" },
-        { name: "Nivel Avanzado", path: "/NivelAvanzado" }
-      ]
-    },
-    opinion: {
-      title: "Danos tu opinión!",
-      links: [{ name: "Junto a ArgyReviews", path: "/resena" }]
-    }
+  // Lista separada de secciones para mejor control
+  const informacionSection = {
+    title: "Información",
+    links: [
+      { name: "Sobre Nosotros", path: "/informacion" },
+      { name: "Términos y Condiciones", path: "/informacion" },
+      { name: "Contacto", path: "/informacion" }
+    ]
   };
 
-  // Función para obtener las secciones visibles según el rol
-  const getVisibleSections = () => {
-    const { informacion, programa, opinion } = baseSection;
+  const programaSection = {
+    title: "Programa",
+    links: [
+      { name: "Nivel Inicial", path: "/NivelInicial" },
+      { name: "Nivel Intermedio", path: "/NivelIntermedio" },
+      { name: "Nivel Avanzado", path: "/NivelAvanzado" }
+    ]
+  };
 
-    switch (role) {
-      case 'inicio':
-        return [informacion, programa];
-      case 'alumno':
-      case 'profesor':
-      case 'profesorNoAutorizado':
-      case 'foro':
-        return [informacion, programa, opinion]; // Incluye la sección de opinión
-      case 'administrador':
-        return []; // Solo muestra redes sociales
-      default:
-        return [informacion, programa];
+  const opinionSection = {
+    title: "Danos tu opinión!",
+    links: [
+      { name: "Junto a ArgyReviews", path: "/resena" }
+    ]
+  };
+
+  // Función simplificada para obtener secciones
+  const getVisibleSections = () => {
+    const commonSections = [informacionSection, programaSection];
+    
+    if (role === 'administrador') {
+      return [];
     }
+    
+    if (['alumno', 'profesor', 'profesorNoAutorizado', 'foro'].includes(role)) {
+      return [...commonSections, opinionSection];
+    }
+    
+    return commonSections;
   };
 
   const visibleSections = getVisibleSections();
-
-  // Determinar si las redes sociales deben ocupar todo el ancho
-  const socialClassNames = role === 'administrador' 
-    ? 'flex flex-col items-center space-y-4 col-span-full'
-    : 'flex flex-col items-center sm:items-start space-y-4';
+  
+  // Log para depuración
+  console.log('Current role:', role);
+  console.log('Visible sections:', visibleSections);
 
   return (
     <footer className="bg-blue-900 text-white w-full">
@@ -97,8 +94,8 @@ const Footer = ({ role }) => {
             </div>
           ))}
           
-          {/* Redes Sociales - siempre visible */}
-          <div className={socialClassNames}>
+          {/* Redes Sociales */}
+          <div className={`flex flex-col items-center sm:items-start space-y-4 ${role === 'administrador' ? 'col-span-full' : ''}`}>
             <h3 className="text-lg font-semibold">Redes Sociales</h3>
             <div className="flex justify-center sm:justify-start space-x-4">
               {socialIcons.map((icon, index) => {

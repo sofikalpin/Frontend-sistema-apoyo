@@ -127,7 +127,7 @@ const CargarProfesor = () => {
                 )}
             </div>
 
-            <Footer />
+            <Footer role = "administrador"/>
         </div>
     );
 };

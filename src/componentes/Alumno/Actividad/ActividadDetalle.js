@@ -101,7 +101,7 @@ const ActividadDetalle = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer role = "alumno" />
     </div>
   );
 };

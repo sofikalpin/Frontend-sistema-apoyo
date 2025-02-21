@@ -277,7 +277,7 @@ export default function InicioProfesor() {
         </div>
       </div>
 
-      <Footer 
+      <Footer role = "inicio"
         sections={footerSections} 
         socialIcons={socialIcons}
         onNavigation={navigate}

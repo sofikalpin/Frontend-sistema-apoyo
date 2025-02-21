@@ -136,7 +136,7 @@ const Examenes = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer role = "alumno"/>
     </div>
   );
 };

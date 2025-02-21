@@ -102,7 +102,7 @@ const ListaProfesores = () => {
                 </div>
             </div>
     
-            <Footer />
+            <Footer role = "administrador"/>
         </div>
     );
 };

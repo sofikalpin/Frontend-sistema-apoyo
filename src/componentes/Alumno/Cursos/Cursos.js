@@ -121,7 +121,7 @@ const CursoDetalleAlumno = () => {
         </div>
 
       </div>
-        <Footer />
+        <Footer role = "alumno" />
     </div>
   );
 };

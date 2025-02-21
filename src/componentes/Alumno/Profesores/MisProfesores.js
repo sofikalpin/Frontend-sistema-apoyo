@@ -254,7 +254,7 @@ const MisProfesores = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer role = "alumno"/>
     </div>
   );
 };

@@ -216,7 +216,7 @@ const InfoPages = () => {
         <main className="flex-1 p-6">{pageComponents[currentPage]}</main>
       </div>
 
-      <Footer 
+      <Footer role = "inicio"
         socialIcons={SOCIAL_ICONS}
         footerSections={FOOTER_SECTIONS}
         onNavigation={navigate}

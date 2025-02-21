@@ -87,7 +87,7 @@ const InicioProfesor = () => {
         )}
       </main>
 
-      <Footer className="mt-12" />
+      <Footer role = "profesor" className="mt-12" />
     </div>
   );
 };

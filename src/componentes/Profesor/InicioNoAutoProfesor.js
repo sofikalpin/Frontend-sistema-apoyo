@@ -35,7 +35,7 @@ const InicioProfesor = () => {
         </div>
       </main>
       
-      <Footer className="mt-12" />
+      <Footer role = "profesorNoAutorizado" className="mt-12" />
     </div>
   );
 };

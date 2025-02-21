@@ -138,7 +138,7 @@ const ListarForos = () => {
                 </div>
             </main>        
             
-            < FooterForo />
+            < FooterForo role = "foro"/>
         </div>
 
     );

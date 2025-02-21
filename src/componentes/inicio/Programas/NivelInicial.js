@@ -133,7 +133,7 @@ const A1A2CourseContentPage = () => {
       <div className="mt-16" /> 
 
       </div>
-      <Footer 
+      <Footer role = "inicio"
         socialIcons={socialIcons}
         footerSections={footerSections}
         onNavigation={navigate}

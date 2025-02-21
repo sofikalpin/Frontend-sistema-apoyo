@@ -98,7 +98,7 @@ const ListaAlumnos = () => {
                 </div>
             </div>
             <div className="mb-16"></div>
-            <Footer />
+            <Footer role = "administrador" />
         </div>
     );
 };

@@ -98,7 +98,7 @@ const ExamenDetalle = () => {
           </div>
         </div>
       </main>
-        <Footer />
+        <Footer role = "alumno"/>
     </div>
   );
 };

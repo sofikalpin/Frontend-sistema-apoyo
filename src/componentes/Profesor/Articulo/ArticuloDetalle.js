@@ -152,7 +152,7 @@ const ArticuloDetalle = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer role = "profesor"/>
     </div>
   );
 };

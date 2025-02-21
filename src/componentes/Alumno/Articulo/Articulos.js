@@ -145,7 +145,7 @@ const Articulos = () => {
           )}
         </div>
       </div>
-        <Footer />
+        <Footer role = "alumno"/>
     </div>
   );
 };

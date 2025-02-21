@@ -190,7 +190,7 @@ const Foro = () => {
         </div>
       </main>
 
-      < FooterForo />
+      < FooterForo role = "foro"/>
 
     </div>
   );

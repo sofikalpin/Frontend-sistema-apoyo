@@ -156,7 +156,7 @@ const ExamenDetalle = () => {
 
         </div>
       </main>
-      <Footer />
+      <Footer role = "profesor"/>
     </div>
   );
 };

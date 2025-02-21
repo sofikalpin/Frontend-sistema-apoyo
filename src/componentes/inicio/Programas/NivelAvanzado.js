@@ -134,7 +134,7 @@ const C1CourseContent = () => {
           <div className="mt-16" />
         </div>
   
-        <Footer 
+        <Footer role = "inicio"
           socialIcons={socialIcons}
           footerSections={footerSections}
           onNavigation={navigate}

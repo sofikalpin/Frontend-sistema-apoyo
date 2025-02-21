@@ -168,7 +168,7 @@ const Consulta = () => {
           )}
         </div>
       </main>
-        < FooterForo />
+        < FooterForo role = "foro"/>
     </div>
   );
 };

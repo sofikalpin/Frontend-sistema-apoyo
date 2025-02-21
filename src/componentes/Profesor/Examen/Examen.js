@@ -238,7 +238,7 @@ const ExamenProfesor = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer role = "profesor" />
     </div>
   );
 };

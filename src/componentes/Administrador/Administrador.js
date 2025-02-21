@@ -78,7 +78,7 @@ const Administrador = () => {
                 </div>
             </main>
             <div className="mb-28"></div>
-            <Footer socialIcons={socialIcons} className="w-full" />
+            <Footer role = "administrador" />
         </div>
     );
 };
