@@ -16,7 +16,8 @@ const FilaAlumnos = ({ alumno, onDelete, deleting }) => {
     };
 
     const controlarEliminar = () => {
-        if (!deleting) {
+        const confirmarEliminar = window.confirm(`¿Desea eliminar al profesor ${alumno.nombrecompleto}?`);
+        if (confirmarEliminar) {
             onDelete(alumno.idusuario);
         }
     };
@@ -81,12 +82,11 @@ const FilaAlumnos = ({ alumno, onDelete, deleting }) => {
                         </div>
                     </div>
                 )}
-                <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                <button 
+                    className="bg-red-500 text-white px-4 py-2 rounded mr-2"
                     onClick={controlarEliminar}
-                    disabled={deleting}
                 >
-                    {deleting ? "Eliminando..." : "Eliminar"}
+                    Eliminar
                 </button>
             </td>
         </tr>

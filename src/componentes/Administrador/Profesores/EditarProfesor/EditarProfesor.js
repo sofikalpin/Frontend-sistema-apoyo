@@ -118,11 +118,12 @@ export const EditarProfesor = ({ onUpdate }) => {
       
       if (response.data.status) {
         setMensajeActualizado("Profesor actualizado con éxito.");
-        setTimeout(() => setMensajeActualizado(""), 3000);
+        setTimeout(() => setMensajeActualizado(""), 2000);
         if (typeof onUpdate === "function") onUpdate();
-        navigate(-1);
+
+      navigate(-1);
       } else {
-        setError(response.data.message || "No se pudo actualizar el profesor.");
+        alert("No se pudo actualizar el alumno.");
       }
     } catch (error) {
       console.error("Error al actualizar el profesor:", error);
