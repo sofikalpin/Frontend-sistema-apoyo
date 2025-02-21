@@ -21,7 +21,8 @@ const Footer = ({ role }) => {
     window.open(link, '_blank');
   };
 
-  const sections = {
+  // Definición de las secciones
+  const baseSection = {
     informacion: {
       title: "Información",
       links: [
@@ -44,29 +45,37 @@ const Footer = ({ role }) => {
     }
   };
 
+  // Función para obtener las secciones visibles según el rol
   const getVisibleSections = () => {
+    const { informacion, programa, opinion } = baseSection;
+
     switch (role) {
       case 'inicio':
-        return [sections.informacion, sections.programa];
+        return [informacion, programa];
       case 'alumno':
       case 'profesor':
       case 'profesorNoAutorizado':
       case 'foro':
-        return [sections.informacion, sections.programa, sections.opinion];
+        return [informacion, programa, opinion]; // Incluye la sección de opinión
       case 'administrador':
-        return [];
+        return []; // Solo muestra redes sociales
       default:
-        return [sections.informacion, sections.programa];
+        return [informacion, programa];
     }
   };
 
   const visibleSections = getVisibleSections();
 
+  // Determinar si las redes sociales deben ocupar todo el ancho
+  const socialClassNames = role === 'administrador' 
+    ? 'flex flex-col items-center space-y-4 col-span-full'
+    : 'flex flex-col items-center sm:items-start space-y-4';
+
   return (
     <footer className="bg-blue-900 text-white w-full">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-
+          {/* Secciones dinámicas */}
           {visibleSections.map((section, sectionIndex) => (
             <div 
               key={sectionIndex} 
@@ -88,7 +97,8 @@ const Footer = ({ role }) => {
             </div>
           ))}
           
-          <div className={`flex flex-col items-center sm:items-start space-y-4 ${role === 'administrador' ? 'col-span-full' : ''}`}>
+          {/* Redes Sociales - siempre visible */}
+          <div className={socialClassNames}>
             <h3 className="text-lg font-semibold">Redes Sociales</h3>
             <div className="flex justify-center sm:justify-start space-x-4">
               {socialIcons.map((icon, index) => {
@@ -108,6 +118,7 @@ const Footer = ({ role }) => {
           </div>
         </div>
 
+        {/* Copyright */}
         <div className="pt-8 mt-8 border-t border-gray-800">
           <p className="text-center sm:text-left text-gray-400 text-xs sm:text-sm">
             © {new Date().getFullYear()} EduMatch. Todos los derechos reservados.
