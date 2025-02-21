@@ -21,78 +21,95 @@ const Footer = ({ role }) => {
     window.open(link, '_blank');
   };
 
-  let section1 = { title: "Información", links: [{ name: "Sobre Nosotros", path: "/informacion" }, { name: "Términos y Condiciones", path: "/informacion" }, { name: "Contacto", path: "/informacion" }] };
-  let section2 = {};
+  const sections = {
+    informacion: {
+      title: "Información",
+      links: [
+        { name: "Sobre Nosotros", path: "/informacion" },
+        { name: "Términos y Condiciones", path: "/informacion" },
+        { name: "Contacto", path: "/informacion" }
+      ]
+    },
+    programa: {
+      title: "Programa",
+      links: [
+        { name: "Nivel Inicial", path: "/NivelInicial" },
+        { name: "Nivel Intermedio", path: "/NivelIntermedio" },
+        { name: "Nivel Avanzado", path: "/NivelAvanzado" }
+      ]
+    },
+    opinion: {
+      title: "Danos tu opinión!",
+      links: [{ name: "Junto a ArgyReviews", path: "/resena" }]
+    }
+  };
 
-  switch (role) {
-    case 'alumno':
-      section2 = { title: "Programa", links: [{ name: "Nivel Inicial", path: "/NivelInicial" }, { name: "Nivel Intermedio", path: "/NivelIntermedio" }, { name: "Nivel Avanzado", path: "/NivelAvanzado" }] };
-      break;
-    case 'profesor':
-    case 'profesorNoAutorizado':
-      section2 = { title: "Danos tu opinión!", links: [{ name: "Junto a ArgyReviews", path: "/resena" }] };
-      break;
-    case 'administrador':
-      section2 = null;
-      break;
-    case 'foro':
-      section2 = null;
-      break;
-    default:
-      section2 = null;
-  }
+  const getVisibleSections = () => {
+    switch (role) {
+      case 'inicio':
+        return [sections.informacion, sections.programa];
+      case 'alumno':
+      case 'profesor':
+      case 'profesorNoAutorizado':
+      case 'foro':
+        return [sections.informacion, sections.programa, sections.opinion];
+      case 'administrador':
+        return [];
+      default:
+        return [sections.informacion, sections.programa];
+    }
+  };
+
+  const visibleSections = getVisibleSections();
 
   return (
-    <footer className="bg-blue-900 text-white">
-      <div className="max-w-6xl mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-lg mb-4">{section1.title}</h3>
-            <ul className="space-y-2">
-              {section1.links.map((link, index) => (
-                <li key={index}>
-                  <button onClick={() => handleNavigation(link.path)} className="text-gray-400 hover:text-white transition-colors">
-                    {link.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {section2 && (
-            <div className="text-center md:text-left">
-              <h3 className="font-semibold text-lg mb-4">{section2.title}</h3>
-              <ul className="space-y-2">
-                {section2.links.map((link, index) => (
-                  <li key={index}>
-                    <button onClick={() => handleNavigation(link.path)} className="text-gray-400 hover:text-white transition-colors">
+    <footer className="bg-blue-900 text-white w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+
+          {visibleSections.map((section, sectionIndex) => (
+            <div 
+              key={sectionIndex} 
+              className="flex flex-col items-center sm:items-start space-y-4"
+            >
+              <h3 className="text-lg font-semibold">{section.title}</h3>
+              <ul className="flex flex-col items-center sm:items-start space-y-3">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <button 
+                      onClick={() => handleNavigation(link.path)} 
+                      className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base"
+                    >
                       {link.name}
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
-          )}
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-lg mb-4">Redes Sociales</h3>
-            <div className="flex justify-center md:justify-start space-x-4">
+          ))}
+          
+          <div className={`flex flex-col items-center sm:items-start space-y-4 ${role === 'administrador' ? 'col-span-full' : ''}`}>
+            <h3 className="text-lg font-semibold">Redes Sociales</h3>
+            <div className="flex justify-center sm:justify-start space-x-4">
               {socialIcons.map((icon, index) => {
                 const IconComponent = icon.icon;
                 return (
                   <button
                     key={index}
                     onClick={() => handleSocialClick(icon.link)}
-                    className={`text-gray-400 ${icon.color} transition-colors`}
+                    className={`text-gray-400 ${icon.color} transition-colors p-2 hover:bg-blue-800 rounded-full`}
                     aria-label={icon.name}
                   >
-                    <IconComponent size={24} />
+                    <IconComponent size={20} className="sm:w-6 sm:h-6" />
                   </button>
                 );
               })}
             </div>
           </div>
         </div>
-        <div className="pt-8 mt-8 border-t border-gray-800 text-center md:text-left">
-          <p className="text-gray-400 text-sm">
+
+        <div className="pt-8 mt-8 border-t border-gray-800">
+          <p className="text-center sm:text-left text-gray-400 text-xs sm:text-sm">
             © {new Date().getFullYear()} EduMatch. Todos los derechos reservados.
           </p>
         </div>
@@ -101,11 +118,4 @@ const Footer = ({ role }) => {
   );
 };
 
-export default function App() {
-  const role = "alumno"; // Cambia el rol dinámicamente según corresponda
-  return (
-    <div className="bg-gray-100">
-      <Footer role={role} />
-    </div>
-  );
-}
+export default Footer;
