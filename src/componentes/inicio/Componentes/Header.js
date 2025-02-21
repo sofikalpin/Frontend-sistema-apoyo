@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useUser } from "../../../Context/UserContext";
 import logo from "../../../logo/LogoInicio.png";
 import ProgramDropdown from "./ProgramDropdown";
+import { AiOutlineMessage } from "react-icons/ai";
 
 const navigationLinks = {
   alumno: [
@@ -227,7 +228,7 @@ const Header = () => {
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-2">
               <img
-                src={logo || "/placeholder.svg"}
+                src={logo }
                 alt="EDU-MATCH"
                 className="h-11 cursor-pointer mr-4"
                 onClick={goToHome}
@@ -256,55 +257,49 @@ const Header = () => {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4">
-              <button
-                onClick={goToChat}
-                className="hidden md:block text-white font-bold hover:text-yellow-400 text-xl"
-              >
-                Chat
+            <div className="flex items-center space-x-3 relative">
+              <button onClick={goToChat} className="text-white text-2xl">
+                <AiOutlineMessage />
               </button>
-              
-              <div className="relative">
-                <button
-                  onClick={toggleMenu}
-                  className="flex items-center gap-2"
-                >
-                  <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
-                    <span className="text-teal-600 font-bold">{userInitial}</span>
-                  </div>
-                  <span className="hidden md:inline text-white font-bold">{userName}</span>
-                </button>
-
-                {isMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
-                    <div className="py-1">
-                      <button
-                        onClick={goToProfile}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Mi Perfil
-                      </button>
-                      <button
-                        onClick={handleLogoutClick}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Cerrar Sesión
-                      </button>
-                    </div>
-                  </div>
-                )}
+              <span
+                className="text-white font-bold text-xl cursor-pointer"
+                onClick={toggleMenu}
+              >
+                {userName}
+              </span>
+              <div className="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-white font-medium text-xl">
+                {userInitial}
               </div>
 
-              <button className="md:hidden" onClick={toggleMobileMenu}>
-                {isMobileMenuOpen ? (
-                  <X className="text-white w-6 h-6" />
-                ) : (
-                  <Menu className="text-white w-6 h-6" />
-                )}
-              </button>
+              {isMenuOpen && (
+                <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg w-48 p-4 mt-2">
+                  <ul className="space-y-3">
+                    <li
+                      className="text-gray-800 hover:text-blue-500 cursor-pointer"
+                      onClick={goToProfile}
+                    >
+                      Ver Perfil
+                    </li>
+                    <li
+                      className="text-gray-800 hover:text-blue-500 cursor-pointer"
+                      onClick={handleLogoutClick}
+                    >
+                      Cerrar Sesión
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
+
+        <button className="md:hidden" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? (
+            <X className="text-white w-6 h-6" />
+          ) : (
+            <Menu className="text-white w-6 h-6" />
+          )}
+        </button>
       </div>
 
       {isMobileMenuOpen && (
