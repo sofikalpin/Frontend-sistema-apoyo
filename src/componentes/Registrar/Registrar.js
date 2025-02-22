@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../logo/LogoInicio.png";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {FaEye, FaEyeSlash, FaCheck, FaTimes } from "react-icons/fa";
 
 export const Registrar = () => {
   const [step, setStep] = useState(1);
@@ -51,6 +51,15 @@ export const Registrar = () => {
     { idrol: 2, descripcion: "alumno" },
   ];
 
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [validationStatus, setValidationStatus] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false
+  });
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -71,6 +80,10 @@ export const Registrar = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: "" }));
+    
+    if (name === 'password') {
+      validatePasswordStrength(value);
+    }
   };
 
   const handleLogoClick = () => navigate("/home");
@@ -104,6 +117,34 @@ export const Registrar = () => {
     }
   };
 
+  const validarPassword = (password) => {
+    if (!password) return "La contraseña es obligatoria";
+    if (password.length < 8) return "La contraseña debe tener al menos 8 caracteres";
+    if (!/[A-Z]/.test(password)) return "Debe incluir al menos una letra mayúscula";
+    if (!/[a-z]/.test(password)) return "Debe incluir al menos una letra minúscula";
+    if (!/[0-9]/.test(password)) return "Debe incluir al menos un número";
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) return "Debe incluir al menos un carácter especial";
+    return "";
+  };
+
+  const validatePasswordStrength = (password) => {
+    let strength = 0;
+    const validations = {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /[0-9]/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+  };
+  setValidationStatus(validations);
+
+  Object.values(validations).forEach(isValid => {
+    if (isValid) strength += 20;
+    });
+
+    setPasswordStrength(strength);
+  };
+
   const validateStep = async () => {
     let newErrors = {};
     let isValid = true;
@@ -130,14 +171,16 @@ export const Registrar = () => {
         if (!emailValid) isValid = false;
         break;
       case 4:
-        if (!formData.password) {
-          newErrors.password = "La contraseña es obligatoria";
-          isValid = false;
-        } else if (formData.password.length < 6) {
-          newErrors.password = "La contraseña debe tener al menos 6 caracteres";
+        const passwordError = validarPassword(formData.password);
+        if (passwordError) {
+          newErrors.password = passwordError;
           isValid = false;
         }
-        if (formData.password !== formData.confirmPassword) {
+
+        if (!formData.confirmPassword) {
+          newErrors.confirmPassword = "Debes confirmar la contraseña";
+          isValid = false;
+        } else if (formData.password !== formData.confirmPassword) {
           newErrors.confirmPassword = "Las contraseñas no coinciden";
           isValid = false;
         }
@@ -217,7 +260,7 @@ export const Registrar = () => {
       }
     }
   };
-
+  
   return (
     <div className="w-full max-w-[400px] mx-auto text-center pt-[100px] h-screen box-border">
       <header className="w-full flex items-center justify-between p-4 bg-[#00A89F] text-white box-shadow-md fixed top-0 left-0 z-10">
@@ -228,7 +271,7 @@ export const Registrar = () => {
           onClick={handleLogoClick}
         />
       </header>
-
+  
       <div className="mt-10 text-center">
         <div className="w-full h-[12px] bg-[#e0e0e0] rounded-full overflow-hidden mt-5">
           <div
@@ -237,7 +280,7 @@ export const Registrar = () => {
           />
         </div>
       </div>
-
+  
       <main className="p-4">
         {step === 1 && (
           <div>
@@ -280,7 +323,7 @@ export const Registrar = () => {
             </div>
           </div>
         )}
-
+  
         {step === 2 && (
           <div>
             <h1 className="text-[36px] text-[#1a2b4b] mb-10 font-semibold">
@@ -303,7 +346,7 @@ export const Registrar = () => {
                 {errors.name}
               </span>
             )}
-
+  
             <label className="block text-left text-[20px] mt-4" htmlFor="nivel">
               *Nivel de inglés
               <select
@@ -326,7 +369,7 @@ export const Registrar = () => {
                 {errors.nivel}
               </span>
             )}
-
+  
             <div className="flex justify-between mt-6">
               <button
                 className="h-[48px] bg-[#f0f0f0] text-[#666] border-none rounded-md text-[16px] font-medium cursor-pointer transition-all duration-200 w-[48%]"
@@ -343,7 +386,7 @@ export const Registrar = () => {
             </div>
           </div>
         )}
-
+  
         {step === 3 && (
           <div>
             <h1 className="text-[36px] text-[#1a2b4b] mb-10 font-semibold">
@@ -372,7 +415,7 @@ export const Registrar = () => {
                 {errors.email}
               </span>
             )}
-
+  
             <div className="flex justify-between mt-6">
               <button
                 className="h-[48px] bg-[#f0f0f0] text-[#666] border-none rounded-md text-[16px] font-medium cursor-pointer transition-all duration-200 w-[48%]"
@@ -390,7 +433,7 @@ export const Registrar = () => {
             </div>
           </div>
         )}
-
+  
         {step === 4 && (
           <div>
             <h1 className="text-[36px] text-[#1a2b4b] mb-10 font-semibold">
@@ -406,7 +449,9 @@ export const Registrar = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="h-[60px] p-4 border border-[#e0e0e0] rounded-md text-[15px] w-full mt-[5%] box-border"
+                    className={`h-[60px] p-4 border ${
+                      errors.password ? 'border-red-500' : 'border-[#e0e0e0]'
+                    } rounded-md text-[15px] w-full mt-[5%] box-border`}
                     placeholder="Escribe tu contraseña"
                   />
                   <button
@@ -424,7 +469,63 @@ export const Registrar = () => {
                 {errors.password}
               </span>
             )}
-
+  
+            {formData.password && (
+              <div className="mt-2">
+                <div className="h-2 w-full bg-gray-200 rounded-full">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      passwordStrength <= 20
+                        ? 'bg-red-500'
+                        : passwordStrength <= 40
+                        ? 'bg-orange-500'
+                        : passwordStrength <= 60
+                        ? 'bg-yellow-500'
+                        : passwordStrength <= 80
+                        ? 'bg-blue-500'
+                        : 'bg-green-500'
+                    }`}
+                    style={{ width: `${passwordStrength}%` }}
+                  />
+                </div>
+                <p className="text-sm mt-1">
+                  Fortaleza de la contraseña:{' '}
+                  <span className="font-medium">
+                    {passwordStrength <= 20
+                      ? 'Muy débil'
+                      : passwordStrength <= 40
+                      ? 'Débil'
+                      : passwordStrength <= 60
+                      ? 'Media'
+                      : passwordStrength <= 80
+                      ? 'Fuerte'
+                      : 'Muy fuerte'}
+                  </span>
+                </p>
+              </div>
+            )}
+  
+            <div className="mt-2 space-y-1">
+              {[
+                { key: 'length', text: 'Mínimo 8 caracteres' },
+                { key: 'uppercase', text: 'Al menos una mayúscula' },
+                { key: 'lowercase', text: 'Al menos una minúscula' },
+                { key: 'number', text: 'Al menos un número' },
+                { key: 'special', text: 'Al menos un carácter especial' }
+              ].map(({ key, text }) => (
+                <div key={key} className="flex items-center space-x-2 text-sm">
+                  {validationStatus[key] ? (
+                    <FaCheck className="text-green-500" />
+                  ) : (
+                    <FaTimes className="text-red-500" />
+                  )}
+                  <span className={validationStatus[key] ? 'text-green-500' : 'text-red-500'}>
+                    {text}
+                  </span>
+                </div>
+              ))}
+            </div>
+  
             <div className="relative mt-4">
               <label className="block text-left text-[20px]" htmlFor="confirmPassword">
                 *Confirmar contraseña
@@ -435,7 +536,9 @@ export const Registrar = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="h-[60px] p-4 border border-[#e0e0e0] rounded-md text-[15px] w-full mt-[5%] box-border"
+                    className={`h-[60px] p-4 border ${
+                      errors.confirmPassword ? 'border-red-500' : 'border-[#e0e0e0]'
+                    } rounded-md text-[15px] w-full mt-[5%] box-border`}
                     placeholder="Confirma tu contraseña"
                   />
                   <button
@@ -447,13 +550,21 @@ export const Registrar = () => {
                   </button>
                 </div>
               </label>
+  
+              {formData.confirmPassword && formData.password === formData.confirmPassword && !errors.password && (
+                <div className="flex items-center space-x-2 mt-2 text-green-500">
+                  <FaCheck />
+                  <span>Las contraseñas coinciden</span>
+                </div>
+              )}
             </div>
+  
             {errors.confirmPassword && (
               <span className="text-red-500 text-[15px] mt-1 block">
                 {errors.confirmPassword}
               </span>
             )}
-
+  
             <div className="flex justify-between mt-6">
               <button
                 className="h-[48px] bg-[#f0f0f0] text-[#666] border-none rounded-md text-[16px] font-medium cursor-pointer transition-all duration-200 w-[48%]"
@@ -473,4 +584,4 @@ export const Registrar = () => {
       </main>
     </div>
   );
-};
+}
