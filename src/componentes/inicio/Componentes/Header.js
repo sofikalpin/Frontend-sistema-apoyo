@@ -272,7 +272,7 @@ const Header = () => {
               </div>
 
               {isMenuOpen && (
-                <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg w-48 p-4 mt-2">
+                <div className="absolute top-12 right-4 z-[100] bg-white shadow-lg rounded-lg w-48 p-4 mt-2">
                   <ul className="space-y-3">
                     <li
                       className="text-gray-800 hover:text-blue-500 cursor-pointer"
