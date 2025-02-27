@@ -75,6 +75,7 @@ const CargarProfesor = () => {
     };
 
     const handleRedirectToProfesores = () => {
+    
         navigate('/administrador/cargarProfesorExterno');
     };
 
@@ -82,7 +83,7 @@ const CargarProfesor = () => {
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-green-100">
             <Header />
 
-            <div className="flex items-center justify-start w-full mt-4 mb-0 px-4 sm:px-8 lg:px-20">
+            <div className="flex items-center justify-start w-full mt-4 mb-0 px-20">
                 <button
                     onClick={() => navigate(-1)}
                     className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors font-medium"
@@ -92,22 +93,22 @@ const CargarProfesor = () => {
                 </button>
             </div>
 
-            <div className="flex flex-col items-center mt-8 px-4 sm:px-8 lg:px-20 max-w-full mx-auto flex-grow mb-16">
+            <div className="flex flex-col items-center mt-8 px-20 max-w-13xl mx-auto flex-grow mb-16">
                 <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Autorizar Profesores</h1>
 
-                <div className="flex flex-col sm:flex-row items-center w-full gap-4 sm:gap-8 mb-4">
+                <div className="flex items-center">
                     <input
                         type="text"
                         placeholder="Buscar por nombre de profesor..."
                         value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
-                        className="p-4 w-full sm:w-96 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="p-4 w-96 text-lg border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         autoComplete="off"
                     />
 
                     <button
                         onClick={handleRedirectToProfesores}
-                        className="bg-[#00A89F] hover:bg-[#008F8C] active:bg-[#007C79] text-white px-6 py-2 rounded-md w-full sm:w-auto mt-4 sm:mt-0 transition-all"
+                        className="bg-[#00A89F] hover:bg-[#008F8C] active:bg-[#007C79] text-white px-6 py-2 rounded-md ml-4 transition-all"
                     >
                         Ver Profesores de JellyJobs
                     </button>
@@ -126,7 +127,7 @@ const CargarProfesor = () => {
                 )}
             </div>
 
-            <Footer role="administrador"/>
+            <Footer role = "administrador"/>
         </div>
     );
 };

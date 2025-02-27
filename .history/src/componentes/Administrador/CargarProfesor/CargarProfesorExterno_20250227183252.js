@@ -30,6 +30,7 @@ const CargarProfesorExterno = () => {
     };
 
     const handleDeleteProfesor = (idbolsa) => {
+       
         console.log(" Lista actual de profesores antes de eliminar:", profesoresIngles);
         if (window.confirm("¿Estás seguro de que deseas rechazar este profesor?")) {
             const profesorExistente = profesoresIngles.find(profesor => profesor.idbolsa === idbolsa);
@@ -39,9 +40,9 @@ const CargarProfesorExterno = () => {
                 alert("Este profesor no se encuentra en la lista.");
                 return;
             }
-
+    
             console.log(` Profesor encontrado con IDbolsa: ${idbolsa}, procediendo a eliminar...`);
-
+    
             axios.delete(`https://backend-sistema-apoyo-production.up.railway.app/api/Bolsatrabajo/EliminarBolsa?id=${idbolsa}`)
                 .then(() => {
                     setProfesoresIngles((prevProfesores) => 
@@ -152,21 +153,19 @@ const CargarProfesorExterno = () => {
 
                 {mensaje && <div className="text-green-600 text-center mb-4">{mensaje}</div>}
                 {error && <div className="text-red-600 text-center mb-4">{error}</div>}
-
+                
                 {loading ? (
                     <div className="text-center text-gray-500">Cargando...</div>
                 ) : (
-                    <div className="w-full sm:w-11/12 lg:w-10/12">
-                        <TablaProfesoresExterno 
-                            data={profesoresIngles}
-                            onDelete={handleDeleteProfesor}
-                            onAutorizar={handleAutorizarProfesor}
-                        />
-                    </div>
+                    <TablaProfesoresExterno 
+                        data={profesoresIngles}
+                        onDelete={handleDeleteProfesor}
+                        onAutorizar={handleAutorizarProfesor}
+                    />
                 )}
             </div>
 
-            <Footer role="administrador" />
+            <Footer role = "administrador"/>
         </div>
     );
 };

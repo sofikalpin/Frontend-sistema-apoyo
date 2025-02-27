@@ -69,7 +69,7 @@ const ListaProfesores = () => {
         <div className="flex flex-col min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
             <Header />
     
-            <div className="flex items-center justify-start w-full mt-4 mb-4 px-4 sm:px-8 md:px-16 lg:px-20">
+            <div className="flex items-center justify-start w-full mt-4 mb-0 px-20">
                 <button
                     onClick={() => navigate(-1)}
                     className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors font-medium"
@@ -79,19 +79,19 @@ const ListaProfesores = () => {
                 </button>
             </div>
     
-            <div className="flex flex-col items-center mt-8 px-4 sm:px-8 md:px-16 lg:px-20 max-w-full mx-auto flex-grow mb-16">
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">Lista de Profesores Registrados</h1>
+            <div className="flex flex-col items-center mt-8 px-20 max-w-13xl mx-auto flex-grow mb-16">
+                <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Lista de Profesores Registrados</h1>
     
                 <input
                     type="text"
                     placeholder="Buscar por nombre de profesor..."
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
-                    className="mb-4 p-2 border border-gray-300 rounded w-full sm:w-80 md:w-96 lg:w-full"
+                    className="mb-4 p-2 border border-gray-300 rounded w-full"
                     autoComplete="off"
                 />
     
-                <div className="w-full">
+                <div>
                     {mensajeEliminacion && <div className="text-green-500 mb-4">{mensajeEliminacion}</div>}
                     {error && <div className="text-red-500 mb-4">{error}</div>}
                     {loading ? (
@@ -102,7 +102,7 @@ const ListaProfesores = () => {
                 </div>
             </div>
     
-            <Footer role="administrador" />
+            <Footer role = "administrador"/>
         </div>
     );
 };

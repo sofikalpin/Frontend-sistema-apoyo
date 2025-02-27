@@ -32,6 +32,7 @@ const ProfesorCVExterno = () => {
 
   const handleDownloadCV = () => {
     if (profesorData.cvUrl) {
+     
       const link = document.createElement('a');
       link.href = profesorData.cvUrl;
       link.download = `CV_${profesorData.nombreCompleto.replace(/\s+/g, '_')}.pdf`;
@@ -44,7 +45,7 @@ const ProfesorCVExterno = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-green-100">
       <Header />
-      <div className="flex items-center justify-start w-full mt-4 mb-0 px-4 sm:px-20">
+      <div className="flex items-center justify-start w-full mt-4 mb-0 px-20">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors font-medium"
@@ -57,6 +58,7 @@ const ProfesorCVExterno = () => {
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
           <div className="p-8">
+            
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
               <div className="relative">
                 <div className="w-32 h-32 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
@@ -74,7 +76,8 @@ const ProfesorCVExterno = () => {
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg border border-gray-100">
                 <Mail className="w-5 h-5 text-green-600" />
                 <div>
@@ -100,6 +103,7 @@ const ProfesorCVExterno = () => {
               </div>
             </div>
 
+           
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               {profesorData.cvUrl ? (
                 <>
@@ -123,6 +127,7 @@ const ProfesorCVExterno = () => {
               )}
             </div>
 
+     
             <div className="mt-8 text-center text-sm text-gray-600">
               Información obtenida de: <a href="https://www.jellyjobs.com" className="text-green-600 hover:underline">JellyJobs</a>
             </div>
@@ -130,6 +135,7 @@ const ProfesorCVExterno = () => {
         </div>
       </main>
 
+    
       {previewModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="relative w-full max-w-6xl bg-white rounded-lg shadow-xl overflow-hidden">
@@ -165,7 +171,7 @@ const ProfesorCVExterno = () => {
         </div>
       )}
 
-      <Footer role="administrador"/>
+      <Footer role = "administrador"/>
     </div>
   );
 };

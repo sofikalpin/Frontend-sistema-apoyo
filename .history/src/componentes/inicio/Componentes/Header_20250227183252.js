@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useUser } from "../../../Context/UserContext";
@@ -82,7 +82,6 @@ const Header = () => {
   const handleLogout = () => {
     logout();
     setIsLogoutModalOpen(false);
-    navigate("/"); // Redirige al usuario a la página de inicio después de cerrar sesión
   };
   
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
@@ -104,11 +103,6 @@ const Header = () => {
         navigate("/");
     }
   };
-
-  // Efecto para cerrar el menú móvil cuando la ruta cambia
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
 
   if (!user) {
     return (

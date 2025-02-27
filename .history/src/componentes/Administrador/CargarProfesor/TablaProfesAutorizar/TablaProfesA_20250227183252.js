@@ -39,12 +39,13 @@ const TablaProfesA = ({ data, onDelete, onAutorizar }) => {
       <div className="overflow-x-auto bg-white rounded-lg shadow">
         <table className="min-w-full border-collapse">
           <thead>
-            <tr className="bg-gray-200 text-gray-700">
-              <th className="py-3 px-4 border-b text-left">NOMBRE Y APELLIDO</th>
-              <th className="py-3 px-4 border-b text-left">CORREO ELECTRÓNICO</th>
-              <th className="py-3 px-4 border-b text-left">NIVEL</th>
-              <th className="py-3 px-4 border-b text-left">CV</th>
-              <th className="py-3 px-4 border-b text-left">ACCIONES</th>
+            <tr className="bbg-gray-200 text-gray-700">
+              <th className="py-3 px-4 border-b">NOMBRE Y APELLIDO</th>
+              <th className="py-3 px-4 border-b">CORREO ELECTRÓNICO</th>
+              <th className="py-3 px-4 border-b">NIVEL</th>
+              <th className="py-3 px-4 border-b">CV</th>
+              <th className="py-3 px-4 border-b">ACCIONES</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -59,7 +60,7 @@ const TablaProfesA = ({ data, onDelete, onAutorizar }) => {
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="py-4 text-center text-gray-500">
+                <td colSpan={4} className="py-4 text-center text-gray-500">
                   No hay datos disponibles
                 </td>
               </tr>

@@ -60,10 +60,10 @@ const Administrador = () => {
             <Header onNavigate={navigate} logo={logo} />
 
             {location.pathname === '/administrador' && (
-                <div className="flex flex-col items-center mt-16 sm:mt-28 px-4 sm:px-8">
+                <div className="flex flex-col items-center mt-28 px-4">
                     <section className="text-center">
                         <h1 className="text-3xl font-bold text-gray-800">Edu-Match</h1>
-                        <h2 className="text-xl sm:text-2xl text-gray-700">Administrador</h2>
+                        <h1 className="text-2xl text-gray-700">Administrador</h1>
                     </section>
 
                     <div className="w-full max-w-md mt-6">
@@ -72,13 +72,13 @@ const Administrador = () => {
                 </div>
             )}
 
-            <main className="flex-grow flex justify-center mt-6 px-4 sm:px-8">
+            <main className="flex-grow flex justify-center mt-6 px-4">
                 <div className="w-full max-w-4xl">
                     <Outlet />
                 </div>
             </main>
-            <div className="mb-16 sm:mb-28"></div>
-            <Footer role="administrador" />
+            <div className="mb-28"></div>
+            <Footer role = "administrador" />
         </div>
     );
 };

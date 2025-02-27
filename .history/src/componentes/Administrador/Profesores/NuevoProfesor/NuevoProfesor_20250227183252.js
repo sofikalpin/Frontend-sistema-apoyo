@@ -29,6 +29,7 @@ export const NuevoProfesor = () => {
     navigate("/administrador/listaProfesores", { replace: true })
   }
 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -91,7 +92,7 @@ export const NuevoProfesor = () => {
           </h3>
         </div>
         
-        <form onSubmit={handleRegistrar} className="p-6 sm:p-10 space-y-6">
+        <form onSubmit={handleRegistrar} className="p-10 space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Nombre Completo
@@ -153,10 +154,10 @@ export const NuevoProfesor = () => {
             </select>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:space-x-4 pt-4">
+          <div className="flex space-x-4 pt-4">
             <button 
               type="submit" 
-              className="w-full sm:w-auto py-3 bg-[#00A89F] text-white rounded-lg 
+              className="w-full py-3 bg-[#00A89F] text-white rounded-lg 
                          hover:bg-opacity-90 transition-all duration-300 
                          transform hover:scale-[1.01] shadow-md hover:shadow-lg"
             >
@@ -165,7 +166,7 @@ export const NuevoProfesor = () => {
             <button 
               type="button" 
               onClick={cancelar}
-              className="w-full sm:w-auto py-3 bg-gray-200 text-gray-700 rounded-lg 
+              className="w-full py-3 bg-gray-200 text-gray-700 rounded-lg 
                          hover:bg-gray-300 transition-all duration-300 
                          transform hover:scale-[1.01] shadow-md hover:shadow-lg"
             >

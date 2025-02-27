@@ -81,7 +81,7 @@ const SubirCV = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-2xl overflow-hidden p-6">
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl overflow-hidden p-6">
     
         <div className="bg-[#00A89F] p-6 text-center flex flex-col items-center">
           <img src={logo} alt="Logo" className="w-28 h-auto object-contain mb-3" />

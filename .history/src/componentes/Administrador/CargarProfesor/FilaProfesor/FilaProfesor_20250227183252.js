@@ -24,12 +24,12 @@ const FilaProfesor = ({ profesor, onDelete, onAutorizar }) => {
             }
         } catch (error) {
             console.error("Error al obtener el CV", error);
-            alert("El CV no está cargado.");
+            alert("El CV, no esta cargado.");
         }
     };
 
     const controlarRechazar = () => {
-        if (window.confirm(`¿Estás seguro que deseas rechazar al profesor ${profesor.nombrecompleto}?`)) {
+        if (window.confirm(`¿Estas seguro que deseas rechazar al profesor ${profesor.nombrecompleto}?`)) {
             onDelete(profesor.idusuario);
         }
     };
@@ -56,37 +56,43 @@ const FilaProfesor = ({ profesor, onDelete, onAutorizar }) => {
     };
 
     const handleVerCV = () => {
+       
         const cvUrl = `https://backend-sistema-apoyo-production.up.railway.app/API/Usuario/ObtenerCV?idUsuario=${profesor.idusuario}`;
+      
         window.open(cvUrl, '_blank');
     };
 
     return (
         <tr className="border-b hover:bg-gray-100">
-            <td className="px-4 py-3 flex items-center gap-2 sm:flex-col sm:items-start">
+            <td className="px-4 py-3 flex items-center gap-2">
                 <span className="w-10 h-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full">
                     {iniciales(profesor.nombrecompleto)}
                 </span>
-                <span className="sm:mt-2">{profesor.nombrecompleto}</span>
+                <span>{profesor.nombrecompleto}</span>
             </td>
-            <td className="px-4 py-3 text-sm sm:text-base">{profesor.correo}</td>
-            <td className="px-4 py-3 text-center text-sm sm:text-base">{nivelInicial(profesor.idnivel)}</td>
+            <td className="px-4 py-3">{profesor.correo}</td>
+            <td className="px-4 py-3 text-center">{nivelInicial(profesor.idnivel)}</td>
+            
+      
             <td className="px-4 py-3 text-center">
                 <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm sm:text-base"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md"
                     onClick={() => obtenerCV(profesor.idusuario)}
                 >
                     Ver CV
                 </button>
             </td>
-            <td className="px-4 py-3 flex items-center gap-2 sm:flex-col sm:items-start">
+
+           
+            <td className="px-4 py-3 flex items-center gap-2">
                 <button 
-                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-sm sm:text-base" 
+                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md" 
                     onClick={handleAutorizarProfesor}
                 >
                     Autorizar
                 </button>
                 <button 
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm sm:text-base" 
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md" 
                     onClick={controlarRechazar}
                 >
                     Rechazar

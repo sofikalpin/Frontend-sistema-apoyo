@@ -5,7 +5,7 @@ import axios from "axios";
 const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
     const navigate = useNavigate();
     const [niveles, setNiveles] = useState([]);
-
+    
     useEffect(() => {
         const cargarNiveles = async () => {
             try {
@@ -20,13 +20,13 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
         
         cargarNiveles();
     }, []);
-
+    
     const controlarRechazar = () => {
         if (window.confirm(`¿Estás seguro que deseas rechazar al profesor ${profesor.nombreCompleto}?`)) {
             onDelete(profesor.idbolsa);
         }
     };
-
+    
     const iniciales = (name) => {
         if (!name) return "";
         return name
@@ -34,13 +34,13 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
             .map(word => word[0])
             .join("").toUpperCase();
     };
-
+    
     const getNivelIdFromDescripcion = (nivelDescripcion) => {
         if (!Array.isArray(niveles)) return null;
         const nivel = niveles.find(n => n.descripcion === nivelDescripcion);
         return nivel ? nivel.idnivel : null;
     };
-
+    
     const nivelInicial = (nivelId) => {
         const nivelesMap = {
             "1": "A1", "2": "A2", "3": "B1", "4": "B2", "5": "C1", "6": "C2",
@@ -53,7 +53,7 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
         const nivel = niveles.find(n => n.idnivel === nivelId);
         return nivel ? nivel.descripcion : nivelesMap[nivelId] || " ";
     };
-
+    
     const generarContraseñaAleatoria = (longitud = 12) => {
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
         let contraseña = '';
@@ -63,7 +63,7 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
         }
         return contraseña;
     };
-
+    
     const generarToken = () => {
         return [...Array(32)].map(() => Math.floor(Math.random() * 36).toString(36)).join('');
     };
@@ -111,7 +111,7 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
             }
         }
     };
-
+    
     const handleVerCV = () => {
         navigate("/administrador/cargarProfesorExterno/profesorCVExterno", { 
             state: { 
@@ -126,7 +126,7 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
             }
         });
     };
-
+    
     return (
         <tr className="border-b hover:bg-gray-100">
             <td className="px-4 py-3 flex items-center gap-2">
@@ -146,15 +146,15 @@ const FilaProfesorExterno = ({ profesor, onDelete, onAutorizar }) => {
                     Ver CV
                 </button>
             </td>
-            <td className="px-4 py-3 flex items-center gap-2 justify-center sm:justify-start">
+            <td className="px-4 py-3 flex items-center gap-2">
                 <button 
-                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md"
+                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md" 
                     onClick={handleAutorizarProfesor}
                 >
                     Enviar para autorización
                 </button>
                 <button 
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md"
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md" 
                     onClick={controlarRechazar}
                 >
                     Rechazar
