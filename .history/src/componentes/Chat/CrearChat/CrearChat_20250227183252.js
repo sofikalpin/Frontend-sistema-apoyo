@@ -63,6 +63,7 @@ const CrearChat = ({ idusuario, onChatCreado, onClose, chatsExistentes = [] }) =
       setMensajeExito("Chat creado con éxito.");
       if (respuesta.status === 201 || respuesta.status === 200) {
         onChatCreado(respuesta.data);
+       
         window.location.reload();
       }
     } catch (error) {
@@ -105,85 +106,85 @@ const CrearChat = ({ idusuario, onChatCreado, onClose, chatsExistentes = [] }) =
   }
 
   return (
-    <div className="max-w-screen-lg w-full mx-auto bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-10">
-      <div className="space-y-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold mb-6 text-center sm:text-left">Crear nuevo chat</h1>
+    <div className="max-w-screen-lg w-full mx-auto bg-white rounded-xl shadow-lg">
+      <div className="p-10">
+        <h1 className="text-3xl font-extrabold mb-6">Crear nuevo chat</h1>
         
         <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Buscar contacto..."
-            value={busqueda}
-            onChange={handleBusqueda}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
+            <input
+              type="text"
+              placeholder="Buscar contacto..."
+              value={busqueda}
+              onChange={handleBusqueda}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
 
-        <div className="border rounded-lg bg-gray-50 overflow-hidden">
-          <div className="h-64 overflow-y-auto">
-            {contactosDisponibles.length === 0 ? (
-              <div className="p-4 text-center text-gray-500">
-                No se encontraron contactos disponibles.
-              </div>
-            ) : (
-              <ul className="divide-y divide-gray-200">
-                {contactosDisponibles.map(contacto => (
-                  <li
-                    key={contacto.idusuario}
-                    onClick={() => setContactoSeleccionado(contacto)}
-                    className={`p-4 cursor-pointer transition-all duration-200 hover:bg-gray-100
-                      ${contactoSeleccionado?.idusuario === contacto.idusuario
-                        ? "bg-blue-50 border-l-4 border-l-blue-500"
-                        : "border-l-4 border-l-transparent"}`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <h3 className="font-medium text-gray-900">
-                          {contacto.nombrecompleto}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                          {getRoleName(contacto.idrol)} • Nivel {nivel(contacto.idnivel)}
-                        </p>
+          <div className="border rounded-lg bg-gray-50 overflow-hidden">
+            <div className="h-64 overflow-y-auto">
+              {contactosDisponibles.length === 0 ? (
+                <div className="p-4 text-center text-gray-500">
+                  No se encontraron contactos disponibles.
+                </div>
+              ) : (
+                <ul className="divide-y divide-gray-200">
+                  {contactosDisponibles.map(contacto => (
+                    <li
+                      key={contacto.idusuario}
+                      onClick={() => setContactoSeleccionado(contacto)}
+                      className={`p-4 cursor-pointer transition-all duration-200 hover:bg-gray-100
+                        ${contactoSeleccionado?.idusuario === contacto.idusuario
+                          ? "bg-blue-50 border-l-4 border-l-blue-500"
+                          : "border-l-4 border-l-transparent"}`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="font-medium text-gray-900">
+                            {contacto.nombrecompleto}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {getRoleName(contacto.idrol)} • Nivel {nivel(contacto.idnivel)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
-        </div>
 
-        {error && (
-          <div className="p-3 bg-red-50 text-red-500 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-        {mensajeExito && (
-          <div className="p-3 bg-green-50 text-green-500 rounded-lg text-sm">
-            {mensajeExito}
-          </div>
-        )}
+          {error && (
+            <div className="p-3 bg-red-50 text-red-500 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+          {mensajeExito && (
+            <div className="p-3 bg-green-50 text-green-500 rounded-lg text-sm">
+              {mensajeExito}
+            </div>
+          )}
 
-        <div className="space-y-2 pt-2">
-          <button
-            onClick={handleCrearChat}
-            className={`w-full py-2.5 rounded-lg text-white font-medium transition-colors duration-200
-              ${contactoSeleccionado
-                ? "bg-blue-500 hover:bg-blue-600"
-                : "bg-gray-300 cursor-not-allowed"}`}
-            disabled={!contactoSeleccionado}
-          >
-            {contactoSeleccionado ? "Crear Chat" : "Selecciona un contacto"}
-          </button>
-          <button
-            onClick={onClose}
-            className="w-full py-2.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium"
-          >
-            Cancelar
-          </button>
+          <div className="space-y-2 pt-2">
+            <button
+              onClick={handleCrearChat}
+              className={`w-full py-2.5 rounded-lg text-white font-medium transition-colors duration-200
+                ${contactoSeleccionado
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-gray-300 cursor-not-allowed"}`}
+              disabled={!contactoSeleccionado}
+            >
+              {contactoSeleccionado ? "Crear Chat" : "Selecciona un contacto"}
+            </button>
+            <button
+              onClick={onClose}
+              className="w-full py-2.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium"
+            >
+              Cancelar
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

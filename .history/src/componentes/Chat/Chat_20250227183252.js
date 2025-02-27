@@ -40,11 +40,11 @@ const Chat = () => {
                     {iniciales(user.nombrecompleto)}
                 </button>
             </header>
-            <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
-                <div className="w-full md:w-1/3 bg-white shadow-md overflow-y-auto p-4 border-b md:border-r md:border-gray-200">
+            <div className="flex flex-1 overflow-hidden">
+                <div className="w-1/3 bg-white shadow-md overflow-y-auto p-4 border-r border-gray-200">
                     <ListaChat onSelectChat={setChatSeleccionado} activeChat={chatSeleccionado} />
                 </div>
-                <div className="w-full md:w-2/3 bg-gray-50 flex items-center justify-center p-4">
+                <div className="w-2/3 bg-gray-50 flex items-center justify-center p-4">
                     {chatSeleccionado ? (
                         <Mensajes idusuario={chatSeleccionado.idusuario1} chatId={chatSeleccionado.idchat} />
                     ) : (
@@ -57,4 +57,3 @@ const Chat = () => {
 };
 
 export default Chat;
-

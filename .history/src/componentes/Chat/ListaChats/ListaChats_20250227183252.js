@@ -86,21 +86,18 @@ const ListaChats = ({ onSelectChat, activeChat }) => {
     }
 
     return (
-        <div className="p-4 max-w-md mx-auto sm:max-w-lg md:max-w-2xl lg:max-w-4xl">
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-                <button
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                >
-                    <ArrowLeft className="w-6 h-6" />
-                    <span>Volver</span>
-                </button>
+        <div className="p-4 max-w-md mx-auto">
+            <div className="flex justify-between items-center mb-4">
+            <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors font-medium"
+          >
+            <ArrowLeft className="w-6 h-6" />
+            <span>Volver</span>
+          </button>
 
-                <h2 className="text-xl font-bold text-gray-800 sm:ml-4">Mis Chats</h2>
-                <button 
-                    onClick={openModal} 
-                    className="bg-blue-500 p-2 rounded-full shadow-md hover:bg-blue-600 transition mt-4 sm:mt-0"
-                >
+                <h2 className="text-xl font-bold text-gray-800">Mis Chats</h2>
+                <button onClick={openModal} className="bg-blue-500 p-2 rounded-full shadow-md hover:bg-blue-600 transition">
                     <img src={nuevoChatIcon} alt="Nuevo Chat" className="w-6 h-6" />
                 </button>
             </div>
