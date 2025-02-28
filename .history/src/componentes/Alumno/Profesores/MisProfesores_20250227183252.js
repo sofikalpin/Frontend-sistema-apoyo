@@ -15,7 +15,6 @@ const MisProfesores = () => {
   const [newOpinion, setNewOpinion] = useState("");
   const [ratingsMap, setRatingsMap] = useState({}); 
   const [currentRating, setCurrentRating] = useState(0); 
-  const [ratingError, setRatingError] = useState(false); // Nuevo estado para el mensaje de error
 
   useEffect(() => {
     const fetchProfesores = async () => {
@@ -57,13 +56,6 @@ const MisProfesores = () => {
 
   const handleAddOpinion = async (profesorId) => {
     if (!newOpinion.trim()) return;
-
-    if (currentRating === 0) {
-      setRatingError(true); // Mostrar error si no se seleccionó ninguna estrella
-      return;
-    }
-
-    setRatingError(false); // Ocultar el error si se seleccionó una estrella
 
     try {
       const token = sessionStorage.getItem("authToken");
@@ -118,10 +110,6 @@ const MisProfesores = () => {
 
   const getOpinionesProfesor = (profesorId) => {
     return opinionesMap[profesorId] || [];
-  };
-
-  const hasAlreadyReviewed = (profesorId) => {
-    return opinionesMap[profesorId]?.length > 0; // Verifica si ya existe alguna reseña para ese profesor
   };
 
   const renderStars = () => {
@@ -191,9 +179,6 @@ const MisProfesores = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-gray-800">{profesor.nombrecompleto}</h3>
                           <p className="text-sm text-gray-500">{opiniones.length} opiniones</p>
-                          {hasAlreadyReviewed(profesor.idusuario) && (
-                            <p className="text-green-500 text-sm mt-2">Ya has dejado una reseña.</p>
-                          )}
                         </div>
                       </div>
 
@@ -230,9 +215,6 @@ const MisProfesores = () => {
                           <div className="flex gap-2 mb-3">
                             {renderStars()}
                           </div>
-                          {ratingError && (
-                            <p className="text-red-500 text-sm mb-3">Debe seleccionar al menos 1 estrella.</p>
-                          )}
                           <div className="flex justify-end gap-2">
                             <button 
                               onClick={() => {
@@ -272,7 +254,7 @@ const MisProfesores = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer role = "alumno"/>
     </div>
   );
 };

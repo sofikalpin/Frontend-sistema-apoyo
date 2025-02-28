@@ -120,10 +120,6 @@ const MisProfesores = () => {
     return opinionesMap[profesorId] || [];
   };
 
-  const hasAlreadyReviewed = (profesorId) => {
-    return opinionesMap[profesorId]?.length > 0; // Verifica si ya existe alguna reseña para ese profesor
-  };
-
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -191,9 +187,6 @@ const MisProfesores = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-gray-800">{profesor.nombrecompleto}</h3>
                           <p className="text-sm text-gray-500">{opiniones.length} opiniones</p>
-                          {hasAlreadyReviewed(profesor.idusuario) && (
-                            <p className="text-green-500 text-sm mt-2">Ya has dejado una reseña.</p>
-                          )}
                         </div>
                       </div>
 
@@ -272,7 +265,7 @@ const MisProfesores = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer role = "alumno"/>
     </div>
   );
 };

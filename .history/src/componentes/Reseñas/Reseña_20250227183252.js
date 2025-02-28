@@ -22,18 +22,13 @@ const UserReviews = () => {
             return;
         }
 
-        if (newReview.rating === 0) {
-            setError("Por favor, selecciona al menos una estrella para la calificación");
-            return;
-        }
-
         if (newReview.comment) {
             setIsSubmitting(true);
-            setError(""); // Limpiar el error si ya no hay uno
+            setError("");
 
             const reviewData = {
                 idReseñaP: 0,
-                idUsuaro: user.idusuario,
+                idUsuaro: user.idusuario, 
                 nombreUsuario: user.nombrecompleto,
                 rating: newReview.rating,
                 comentario: newReview.comment,
@@ -60,9 +55,11 @@ const UserReviews = () => {
                         },
                     ]);
                     setNewReview({ rating: 5, comment: "" });
+                   
                     setSuccessMessage(true);
-                    setTimeout(() => setSuccessMessage(false), 10000);
-                    navigate(-1);
+                    setTimeout(() => setSuccessMessage(false), 
+                    navigate(-1),
+                    10000);
                 }
             } catch (err) {
                 setError("Error al enviar la reseña. Por favor, intenta de nuevo.");
@@ -95,7 +92,7 @@ const UserReviews = () => {
                     {successMessage && (
                         <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg flex items-center gap-2">
                             <CheckCircle className="w-5 h-5 text-green-600" />
-                            Tu opinión nos ayuda a mejorar, gracias por tu colaboración
+                            Tu opinion nos ayuda a mejorar, gracias por tu colaboración
                         </div>
                     )}
 
@@ -119,12 +116,6 @@ const UserReviews = () => {
                                 </button>
                             ))}
                         </div>
-
-                        {newReview.rating === 0 && (
-                            <p className="text-red-500 text-sm mt-2">
-                                Debes seleccionar al menos una estrella.
-                            </p>
-                        )}
 
                         <textarea
                             placeholder="Comentario"
