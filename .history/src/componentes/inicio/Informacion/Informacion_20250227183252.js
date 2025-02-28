@@ -158,9 +158,9 @@ const TerminosYCondiciones = () => (
         </p>
       </div>
       <div className="p-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-gray-800">6. Obtencion de información por parte de Jelly Jobs y ArgyReviews </h2>
+        <h2 className="text-2xl font-semibold text-gray-800">6. Condición de Google </h2>
         <p className="text-lg text-gray-700 mt-4">
-          Jelly Jobs y ArgyReviews pueden obtener información sobre tus habilidades y experiencia profesional.
+          Solo esta permitido ingresar con una cuenta de Google, a los alumnos de EduMatch.
         </p>
       </div>
     </div>
